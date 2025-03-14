@@ -58,11 +58,11 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run_desktop", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", "fish", NULL };
-static const char *internetcmd[]  = { "firefox-esr", NULL };
-static const char *internetprivatecmd[]  = { "firefox-esr", "--private-window", NULL };
-static const char *aicmd[]  = { "firefox-esr", "--private-window", "https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1", NULL };
+static const char *internetcmd[]  = { "firefox-esr", "--new-window", NULL };
+static const char *internetprivatecmd[]  = { "firefox-esr", "--new-window", "--private-window", NULL };
+static const char *aicmd[]  = { "firefox-esr", "--new-window", "--private-window", "https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
