@@ -72,7 +72,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_i,	     spawn,          {.v = internetcmd } },
 	{ MODKEY|ShiftMask,             XK_o,	     spawn,          {.v = internetprivatecmd } },
 	{ MODKEY|ShiftMask,             XK_p,	     spawn,          {.v = aicmd } },
-	{ MODKEY|ShiftMask,             XK_n,	     spawn,          SHCMD("slock")  },
+	{ MODKEY|ShiftMask,             XK_m,	     spawn,          SHCMD("slock")  },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
