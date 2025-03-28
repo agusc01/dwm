@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#define FONT "Ubuntu:size=12" 
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -13,8 +14,8 @@ static       int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const int user_bh            = 18;       /* 2 is the default spacing around the bar's font */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { FONT };
+static const char dmenufont[]       = FONT; 
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -92,16 +93,23 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-p", "Run:" , "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *roficmd[]  = { "rofi", "-show", "drun", NULL };
-static const char *termcmd[]  = { "xfce4-terminal", NULL };
+static const char *dmenucmd[] = { 
+    "dmenu_run",
+    "-p", "Run:",
+    "-m", dmenumon,
+    "-fn", dmenufont,
+    "-nb", col_gray1,
+    "-nf", col_gray3,
+    "-sb", col_cyan,
+    "-sf", col_gray4,
+    NULL
+};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_o,      spawn,          {.v = roficmd } },
     { MODKEY,                       XK_u,      spawn,          SHCMD("dshortcuts") },
-	{ MODKEY,                       XK_y,      spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_y,      spawn,          SHCMD("st") },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	STACKKEYS(MODKEY,                          focus)
@@ -172,7 +180,7 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD("st") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
