@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#define FONT "Ubuntu:size=12" 
+#define FONT "Ubuntu:size=12"
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -15,16 +15,15 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const int user_bh            = 18;       /* 2 is the default spacing around the bar's font */
 static const char *fonts[]          = { FONT };
-static const char dmenufont[]       = FONT; 
-static const char col_gray1[]       = "#000000";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char black[]           = "#000000";
+static const char gray[]            = "#444444";
+static const char light_blue[]      = "#bbbbbb";
+static const char white[]           = "#eeeeee";
+static const char blue[]            = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { light_blue, black, gray },
+	[SchemeSel]  = { white, blue,  blue  },
 };
 
 /* tagging */
@@ -78,11 +77,11 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      previewtag,     {.ui = TAG } },     \
-	//{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 #define STACKKEYS(MOD,ACTION) \
 	{ MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
 	{ MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
-	{ MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \
+	// { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \
 	{ MOD, XK_q,     ACTION##stack, {.i = 0 } }, \
 	{ MOD, XK_a,     ACTION##stack, {.i = 1 } }, \
 	{ MOD, XK_z,     ACTION##stack, {.i = 2 } }, \
@@ -110,41 +109,42 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_6,      incrihgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_7,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_8,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_9,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	// { MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_o,      incrogaps,      {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_6,      incrihgaps,     {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_7,      incrivgaps,     {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_8,      incrohgaps,     {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_9,      incrovgaps,     {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
+	// { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY|ControlMask,           XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	// { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, // README
+	// { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },  // README
+	// { MODKEY,                       XK_period, focusmon,       {.i = +1 } },  // README
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_minus, 		setborderpx,    {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_plus, 		setborderpx,    {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_numbersign, 	setborderpx,    {.i = 0 } },
+	// { MODKEY|ShiftMask,             XK_minus, 		setborderpx,    {.i = -1 } },
+	// { MODKEY|ShiftMask,             XK_plus, 		setborderpx,    {.i = +1 } },
+	// { MODKEY|ShiftMask,             XK_numbersign, 	setborderpx,    {.i = 0 } },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -156,8 +156,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_BackSpace, quit,        {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
-	{ MODKEY,                       XK_r,      previewallwin,  {0} },
+	{ MODKEY|ShiftMask,             XK_r,      previewallwin,  {0} },
 };
 
 /* button definitions */
@@ -176,11 +175,22 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
-
 /* signal definitions */
 /* signum must be greater than 0 */
 /* trigger signals using `xsetroot -name "fsignal:<signum>"` */
 static Signal signals[] = {
-	/* signum       function        argument  */
-	{ 1,            setlayout,      {.v = 0} },
+/* signum   function                         argument  */
+	{  0,   setlayout,                      {.v = &layouts[0]}   },
+	{  1,   setlayout,                      {.v = &layouts[1]}   },
+	{  2,   setlayout,                      {.v = &layouts[2]}   },
+    {  4,   setlayout,                      {.v = &layouts[3]}   },
+	{  3,   setlayout,                      {.v = &layouts[4]}   },
+	{  5,   setlayout,                      {.v = &layouts[5]}   },
+	{  6,   setlayout,                      {.v = &layouts[6]}   },
+	{  7,   setlayout,                      {.v = &layouts[7]}   },
+	{  8,   setlayout,                      {.v = &layouts[8]}   },
+	{  9,   setlayout,                      {.v = &layouts[9]}   },
+	{ 10,   setlayout,                      {.v = &layouts[10]}  },
+	{ 11,   setlayout,                      {.v = &layouts[11]}  },
+	{ 12,   setlayout,                      {.v = &layouts[12]}  },
 };
