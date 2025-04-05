@@ -21,7 +21,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} }, /* increment space in y axias */
 	{ MODKEY|ShiftMask,             XK_r,      setcfact,       {.f =  0.00} }, /* reset space in y axias */
 
-	{ MODKEY,                       XK_Return, zoom,           {0} }, /* toggle between last 2 clients */
+	{ MODKEY,                       XK_Return, zoom,           {0} }, /* toggle between master & first no master */
     { MODKEY,                       XK_space,  setlayout,      {0} }, /* toggle between last 2 layouts*/
 	{ MODKEY,                       XK_Tab,    view,           {0} }, /* toggle between last 2 tags*/
 
@@ -40,12 +40,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } }, /* active ALL the layouts */
 
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, // README
-
-	{ MODKEY|ControlMask,           XK_comma,  focusmon,       {.i = -1 } },  // README
-	{ MODKEY|ControlMask,           XK_period, focusmon,       {.i = +1 } },  // README
-                                                                              //
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
