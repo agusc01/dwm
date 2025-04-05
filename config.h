@@ -78,17 +78,18 @@ static const Layout layouts[] = {
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      previewtag,     {.ui = TAG } },     \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \
+    { MODKEY|AltMask,               KEY,      previewtag,     {.ui = TAG } },     \
 
 #define STACKKEYS(MOD,ACTION) \
 	{ MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
 	{ MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
-	// { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \
+	/* { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \
 	{ MOD, XK_q,     ACTION##stack, {.i = 0 } }, \
 	{ MOD, XK_a,     ACTION##stack, {.i = 1 } }, \
 	{ MOD, XK_z,     ACTION##stack, {.i = 2 } }, \
 	{ MOD, XK_x,     ACTION##stack, {.i = -1 } },
+    */
  
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/usr/bin/fish", "-c", cmd, NULL } }
@@ -116,6 +117,7 @@ static const Button buttons[] = {
 /* trigger signals using `xsetroot -name "fsignal:<signum>"` */
 static Signal signals[] = {
 /* signum   function                         argument  */
+    /* Layouts */
 	{  0,   setlayout,                      {.v = &layouts[0]}   },
 	{  1,   setlayout,                      {.v = &layouts[1]}   },
 	{  2,   setlayout,                      {.v = &layouts[2]}   },
@@ -130,4 +132,36 @@ static Signal signals[] = {
 	{ 11,   setlayout,                      {.v = &layouts[11]}  },
 	{ 12,   setlayout,                      {.v = &layouts[12]}  },
 	{ 13,   setlayout,                      {.v = &layouts[13]}  },
+
+    /* Border */
+    { 30,   setborderpx,                    {.i = -1}            },
+    { 31,   setborderpx,                    {.i = +1}            },
+    { 32,   setborderpx,                    {.i = 0 }            },
+
+    /* Gaps */
+    { 40,   incrgaps,                       {.i = +1 }           },
+    { 41,   incrgaps,                       {.i = -1 }           },
+    { 42,   incrigaps,                      {.i = +1 }           },
+    { 43,   incrigaps,                      {.i = -1 }           },
+    { 44,   incrogaps,                      {.i = +1 }           },
+    { 45,   incrogaps,                      {.i = -1 }           },
+    { 46,   incrihgaps,                     {.i = +1 }           },
+    { 47,   incrihgaps,                     {.i = -1 }           },
+    { 48,   incrivgaps,                     {.i = +1 }           },
+    { 49,   incrivgaps,                     {.i = -1 }           },
+    { 51,   incrohgaps,                     {.i = +1 }           },
+    { 52,   incrohgaps,                     {.i = -1 }           },
+    { 53,   incrovgaps,                     {.i = +1 }           },
+    { 54,   incrovgaps,                     {.i = -1 }           },
+    { 55,   defaultgaps,                    {0}                  },
+    { 56,   togglegaps,                     {0}                  },
+
+    /* toggles */
+    { 70,   togglebar,                      {0}                  },
+    { 71,   togglefloating,                 {0}                  },
+    { 72,   togglefullscr,                  {0}                  },
+    { 73,   togglesticky,                   {0}                  },
+    { 74,   togglesmartgaps,                {0}                  },
+    { 75,   togglesmartborders,             {0}                  },
+    { 76,   togglealttag,                   {0}                  },
 };
