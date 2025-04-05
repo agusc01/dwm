@@ -264,6 +264,8 @@ static void tagmon(const Arg *arg);
 static void togglealttag(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglesticky(const Arg *arg);
+static void togglesmartgaps(const Arg *arg);
+static void togglesmartborders(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglefullscr(const Arg *arg);
 static void toggletag(const Arg *arg);
@@ -2194,6 +2196,20 @@ togglefullscr(const Arg *arg)
 {
   if(selmon->sel)
     setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+}
+
+void
+togglesmartborders(const Arg *arg)
+{
+    smartborders = !smartborders;
+    arrange(NULL);
+}
+
+void
+togglesmartgaps(const Arg *arg)
+{
+    smartgaps = !smartgaps;
+    arrange(selmon);
 }
 
 void
