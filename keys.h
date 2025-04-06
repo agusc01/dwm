@@ -1,9 +1,36 @@
-/* commands */
+/* key definitions */
+#define MODKEY Mod4Mask
+#define AltMask Mod1Mask
+
+#define TAGKEYS(KEY,TAG) \
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \
+    { MODKEY|AltMask,               KEY,      previewtag,     {.ui = TAG } },     \
+
+#define STACKKEYS(MOD,ACTION) \
+	{ MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
+	{ MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
+	/* { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \
+	{ MOD, XK_q,     ACTION##stack, {.i = 0 } }, \
+	{ MOD, XK_a,     ACTION##stack, {.i = 1 } }, \
+	{ MOD, XK_z,     ACTION##stack, {.i = 2 } }, \
+	{ MOD, XK_x,     ACTION##stack, {.i = -1 } },
+    */
+
+/* helper for spawning shell commands in the pre dwm-5.0 fashion */
+#define SHCMD(cmd) { .v = (const char*[]){ "/usr/bin/fish", "-c", cmd, NULL } }
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          SHCMD("dshortcuts") },
 	{ MODKEY,                       XK_o,      spawn,          SHCMD("st") },
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock") },
+	{ MODKEY,                       XK_c,      spawn,          SHCMD("galculator") },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("surf") },
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("firefox-esr") },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("firefox-esr --private-window") },
 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
@@ -21,7 +48,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} }, /* increment space in y axias */
 	{ MODKEY|ShiftMask,             XK_r,      setcfact,       {.f =  0.00} }, /* reset space in y axias */
 
-	{ MODKEY,                       XK_Return, zoom,           {0} }, /* toggle between master & first no master */
+	{ MODKEY,                       XK_Return, zoom,           {0} }, /* toggle changing master with the fisrt no master */
     { MODKEY,                       XK_space,  setlayout,      {0} }, /* toggle between last 2 layouts*/
 	{ MODKEY,                       XK_Tab,    view,           {0} }, /* toggle between last 2 tags*/
 

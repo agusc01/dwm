@@ -70,30 +70,6 @@ static const Layout layouts[] = {
 	/*14*/{ NULL,       NULL },
 };
 
-/* key definitions */
-#define MODKEY Mod4Mask
-#define AltMask Mod1Mask
-
-#define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \
-    { MODKEY|AltMask,               KEY,      previewtag,     {.ui = TAG } },     \
-
-#define STACKKEYS(MOD,ACTION) \
-	{ MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
-	{ MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
-	/* { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \
-	{ MOD, XK_q,     ACTION##stack, {.i = 0 } }, \
-	{ MOD, XK_a,     ACTION##stack, {.i = 1 } }, \
-	{ MOD, XK_z,     ACTION##stack, {.i = 2 } }, \
-	{ MOD, XK_x,     ACTION##stack, {.i = -1 } },
-    */
- 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/usr/bin/fish", "-c", cmd, NULL } }
-
 #include "keys.h"
 
 /* button definitions */
@@ -132,6 +108,10 @@ static Signal signals[] = {
 	{ 11,   setlayout,                      {.v = &layouts[11]}  },
 	{ 12,   setlayout,                      {.v = &layouts[12]}  },
 	{ 13,   setlayout,                      {.v = &layouts[13]}  },
+
+    /* Sound & Brightness */
+    // 20 sound
+    // 21 brightness
 
     /* Border */
     { 30,   setborderpx,                    {.i = -1}            },
