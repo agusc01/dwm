@@ -28,9 +28,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_o,      spawn,          SHCMD("st") },
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock") },
 	{ MODKEY,                       XK_c,      spawn,          SHCMD("galculator") },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("surf") },
-	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("firefox-esr") },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("firefox-esr --private-window") },
+	{ MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("surf") },
+	{ MODKEY|ControlMask,           XK_f,      spawn,          SHCMD("firefox-esr") },
+	{ MODKEY|ControlMask|ShiftMask, XK_f,      spawn,          SHCMD("firefox-esr --private-window") },
 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
@@ -64,7 +64,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } }, /* active ALL the layouts */
+	{ MODKEY|ShiftMask|ControlMask, XK_0,      view,           {.ui = ~0 } }, /* active ALL the layouts */
 
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, // README
 
