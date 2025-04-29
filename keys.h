@@ -26,8 +26,9 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          SHCMD("dshortcuts") },
 	{ MODKEY,                       XK_o,      spawn,          SHCMD("st") },
+	{ MODKEY,                       XK_i,      spawn,          SHCMD("dmenu_run_desktop") },
+    { MODKEY,                       XK_u,      spawn,          SHCMD("galculator") },
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock") },
-	{ MODKEY,                       XK_c,      spawn,          SHCMD("galculator") },
 	{ MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("surf") },
 	{ MODKEY|ControlMask,           XK_f,      spawn,          SHCMD("firefox-esr") },
 	{ MODKEY|ControlMask|ShiftMask, XK_f,      spawn,          SHCMD("firefox-esr --private-window") },
