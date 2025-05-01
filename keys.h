@@ -42,12 +42,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_w,      incnmaster,     {.i = +1 } }, /* TODO: valid when it is the last client */
 	{ MODKEY,                       XK_e,      incnmaster,     {.i = -1 } },
 
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} }, /* decrement space in x axias */
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} }, /* increment space in x axias */
-	{ MODKEY,                       XK_r,      setcfact,       {.f =  0.00} }, /* reset space in x axias */
-	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} }, /* decrement space in y axias */
-	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} }, /* increment space in y axias */
-	{ MODKEY|ShiftMask,             XK_r,      setcfact,       {.f =  0.00} }, /* reset space in y axias */
+	{ MODKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} }, /* decrement space in x axias */
+	{ MODKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} }, /* increment space in x axias */
+	{ MODKEY|ShiftMask,             XK_r,      setmfact,       {.f =  0.00} }, /* reset space in x axias */
+	{ MODKEY|ShiftMask,             XK_j,      setcfact,       {.f = +0.25} }, /* decrement space in y axias */
+	{ MODKEY|ShiftMask,             XK_k,      setcfact,       {.f = -0.25} }, /* increment space in y axias */
+	{ MODKEY|ShiftMask,             XK_t,      setcfact,       {.f =  0.00} }, /* reset space in y axias */
 
 	{ MODKEY,                       XK_Return, zoom,           {0} }, /* toggle changing master with the fisrt no master */
     { MODKEY,                       XK_space,  setlayout,      {0} }, /* toggle between last 2 layouts*/
@@ -60,8 +60,8 @@ static const Key keys[] = {
 
 	{ MODKEY,                       XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY,                       XK_period, cyclelayout,    {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_j,      cycleview,      {1} },
-    { MODKEY|ShiftMask,             XK_k,      cycleview,      {0} },
+    { MODKEY,                       XK_h,      cycleview,      {1} },
+    { MODKEY,                       XK_l,      cycleview,      {0} },
 
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
