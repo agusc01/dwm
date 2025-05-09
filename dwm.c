@@ -2037,6 +2037,8 @@ setup(void)
 	XSelectInput(dpy, root, wa.event_mask);
 	grabkeys();
 	focus(NULL);
+
+    system("apt list --upgradable 2>/dev/null | grep 'upgradable' | wc -l | xargs -I {} notify-send 'Updates' '{} availables updates'");
 }
 
 void
