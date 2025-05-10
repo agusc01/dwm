@@ -2038,7 +2038,9 @@ setup(void)
 	grabkeys();
 	focus(NULL);
 
-    system("apt list --upgradable 2>/dev/null | grep 'upgradable' | wc -l | xargs -I {} notify-send 'Updates' '{} availables updates'");
+	// system("updates");
+	system("~/.bash_scripts/globals/fsignal 70"); //togglebar
+    system("slock");
 }
 
 void

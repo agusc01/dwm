@@ -58,6 +58,14 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_minus,  setlayout,      {.v = &layouts[5]} },
 
+	{ MODKEY|ShiftMask,             XK_q,      spawn,          SHCMD("smute notify") },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("s0 notify") },
+	{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("s1 notify") },
+    { MODKEY|ShiftMask,             XK_r,      spawn,          SHCMD("sunmute notify") },
+
+	{ MODKEY|ShiftMask,             XK_comma,  spawn,          SHCMD("b0 notify") },
+	{ MODKEY|ShiftMask,             XK_period, spawn,          SHCMD("b1 notify") },
+
 	{ MODKEY,                       XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY,                       XK_period, cyclelayout,    {.i = +1 } },
     { MODKEY,                       XK_h,      cycleview,      {1} },
@@ -85,6 +93,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask|ControlMask, XK_c,      killclient,     {0} },
 	{ MODKEY|ShiftMask|ControlMask, XK_BackSpace, quit,        {0} },
 
-};
+    };
 
 
