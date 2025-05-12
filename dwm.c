@@ -181,6 +181,11 @@ typedef struct {
 	int monitor;
 } Rule;
 
+typedef struct {
+	const char** command;
+	const char* name;
+} Launcher;
+
 /* function declarations */
 static void applyrules(Client *c);
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
@@ -531,9 +536,26 @@ buttonpress(XEvent *e)
 				selmon->previewshow = 0;
 				XUnmapWindow(dpy, selmon->tagwin);
 			}
-		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
+            goto execute_handler;
+		} else if (ev->x < x + TEXTW(selmon->ltsymbol)) {
 			click = ClkLtSymbol;
-		else
+			goto execute_handler;
+		}
+
+        x += TEXTW(m->ltsymbol); // README, TODO, FIXME
+
+		for(i = 0; i < LENGTH(launchers); i++) {
+			x += TEXTW(launchers[i].name);
+			
+			if (ev->x < x) {
+				Arg a;
+				a.v = launchers[i].command;
+				spawn(&a);
+				return;
+			}
+		}
+
+		if (ev->x > selmon->ww - TEXTW(stext))
 			click = ClkStatusText;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
@@ -541,6 +563,9 @@ buttonpress(XEvent *e)
 		XAllowEvents(dpy, ReplayPointer, CurrentTime);
 		click = ClkClientWin;
 	}
+
+    execute_handler:
+
 	for (i = 0; i < LENGTH(buttons); i++)
 		if (click == buttons[i].click && buttons[i].func && buttons[i].button == ev->button
 		&& CLEANMASK(buttons[i].mask) == CLEANMASK(ev->state))
@@ -874,6 +899,13 @@ drawbar(Monitor *m)
 	w = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+	
+	for (i = 0; i < LENGTH(launchers); i++)
+	{
+		w = TEXTW(launchers[i].name);
+		drw_text(drw, x, 0, w, bh, lrpad / 2, launchers[i].name, urg & 1 << i);
+		x += w;
+	}
 
 	if ((w = m->ww - tw - x) > bh) {
 		drw_setscheme(drw, scheme[SchemeNorm]);
@@ -2038,9 +2070,9 @@ setup(void)
 	grabkeys();
 	focus(NULL);
 
-	// system("updates");
+	system("updates");
 	system("~/.bash_scripts/globals/fsignal 70"); //togglebar
-    system("slock");
+    // system("slock");
 }
 
 void
