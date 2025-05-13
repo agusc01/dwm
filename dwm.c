@@ -2070,8 +2070,8 @@ setup(void)
 	grabkeys();
 	focus(NULL);
 
-	system("updates");
-	system("~/.bash_scripts/globals/fsignal 70"); //togglebar
+    // system("updates");
+    system("~/.bash_scripts/globals/fsignal 70"); //togglebar
     // system("slock");
 }
 
