@@ -7,6 +7,7 @@ static const char* wifi[]         = { "fish", "-c", "wifi rofi both", NULL };
 static const char* bluetooth[]    = { "fish", "-c", "bluetooth rofi both", NULL };
 static const char* brightness[]   = { "fish", "-c", "brightness rofi both", NULL };
 static const char* sound[]        = { "fish", "-c", "sound rofi both", NULL };
+static const char* rotation[]     = { "fish", "-c", "rotation rofi both", NULL };
 static const char* thunar[]       = { "thunar", NULL };
 static const char* galculator[]   = { "galculator", NULL };
 
@@ -20,6 +21,7 @@ static const Launcher launchers[] = {
 	{ bluetooth,            "" },
 	{ brightness,           "" },
 	{ sound,                "" },
+	{ rotation,             "" },
 	{ thunar,               "" },
 	{ galculator,           "" },
 };
