@@ -5,6 +5,8 @@ static const char* apps[]         = { "rofi", "-show", "drun", NULL };
 static const char* firefox[]      = { "firefox", "--private-window", NULL };
 static const char* wifi[]         = { "fish", "-c", "wifi rofi both", NULL };
 static const char* bluetooth[]    = { "fish", "-c", "bluetooth rofi both", NULL };
+static const char* brightness[]   = { "fish", "-c", "brightness rofi both", NULL };
+static const char* sound[]        = { "fish", "-c", "sound rofi both", NULL };
 static const char* thunar[]       = { "thunar", NULL };
 static const char* galculator[]   = { "galculator", NULL };
 
@@ -16,6 +18,8 @@ static const Launcher launchers[] = {
     { firefox,              "" },
 	{ wifi,                 "" },
 	{ bluetooth,            "" },
+	{ brightness,           "" },
+	{ sound,                "" },
 	{ thunar,               "" },
 	{ galculator,           "" },
 };
