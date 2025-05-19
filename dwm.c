@@ -69,7 +69,33 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum {
+    SchemeState0,
+    SchemeState1,
+    SchemeState2,
+    SchemeState3,
+    SchemeState4,
+    SchemeState5,
+    SchemeState6,
+    SchemeState7,
+    SchemeState8,
+    SchemeState9,
+
+    SchemePrimary0,
+    SchemePrimary1,
+    SchemePrimary2,
+    SchemePrimary3,
+    SchemePrimary4,
+    SchemePrimary5,
+    SchemePrimary6,
+    SchemePrimary7,
+    SchemePrimary8,
+    SchemePrimary9,
+
+    SchemeNorm,
+    SchemeSel,
+}; /* color schemes */
+
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetWMSticky, NetClientList, NetLast }; /* EWMH atoms */
@@ -867,6 +893,10 @@ drawbar(Monitor *m)
 	// int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
+	char *ts = stext;
+	char *tp = stext;
+	int tx = 0;
+	char ctmp;
 	Client *c;
 
 	if (!m->showbar)
@@ -876,7 +906,17 @@ drawbar(Monitor *m)
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+		while (1) {
+			if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
+			ctmp = *ts;
+			*ts = '\0';
+			drw_text(drw, m->ww - tw + tx, 0, tw - tx, bh, 0, tp, 0);
+			tx += TEXTW(tp) -lrpad;
+			if (ctmp == '\0') { break; }
+			drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
+			*ts = ctmp;
+			tp = ++ts;
+		}
 	}
 
 	for (c = m->clients; c; c = c->next) {
@@ -2071,7 +2111,7 @@ setup(void)
 	focus(NULL);
 
     // system("updates");
-    system("~/.bash_scripts/globals/fsignal 70"); //togglebar
+    // system("~/.bash_scripts/globals/fsignal 70"); //togglebar
     // system("slock");
 }
 
