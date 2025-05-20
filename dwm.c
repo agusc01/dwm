@@ -70,7 +70,6 @@
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum {
-    SchemeState0,
     SchemeState1,
     SchemeState2,
     SchemeState3,
@@ -80,8 +79,8 @@ enum {
     SchemeState7,
     SchemeState8,
     SchemeState9,
+    SchemeState10,
 
-    SchemePrimary0,
     SchemePrimary1,
     SchemePrimary2,
     SchemePrimary3,
@@ -91,6 +90,7 @@ enum {
     SchemePrimary7,
     SchemePrimary8,
     SchemePrimary9,
+    SchemePrimary10,
 
     SchemeNorm,
     SchemeSel,
