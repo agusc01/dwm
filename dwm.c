@@ -70,6 +70,9 @@
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum {
+    SchemeNorm,
+    SchemeSel,
+
     SchemeState1,
     SchemeState2,
     SchemeState3,
@@ -92,8 +95,6 @@ enum {
     SchemePrimary9,
     SchemePrimary10,
 
-    SchemeNorm,
-    SchemeSel,
 }; /* color schemes */
 
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,

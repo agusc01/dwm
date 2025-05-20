@@ -30,7 +30,10 @@ static const char prussian_blue[]       = "#04395E";
 
 static const char *colors[][3]      = {
 	/*                    fg             bg                   border   */
-	[SchemeState1]    = { black,         red,                 red  },
+	[SchemeNorm]      = { white,         black,               gray },
+	[SchemeSel]       = { light_gray,    blue,                forest_green  },
+
+	[SchemeState1]    = { white,         red,                 red  },
 	[SchemeState2]    = { black,         aerospace_orange,    aerospace_orange  },
 	[SchemeState3]    = { black,         orange_peel,         orange_peel  },
 	[SchemeState4]    = { black,         jonquil,             jonquil  },
@@ -38,7 +41,7 @@ static const char *colors[][3]      = {
 	[SchemeState6]    = { black,         lime,                lime  },
 	[SchemeState7]    = { black,         bright_green,        bright_green  },
 	[SchemeState8]    = { black,         green,               green  },
-	[SchemeState9]    = { black,         lime_green,          lime_green  },
+	[SchemeState9]    = { white,         lime_green,          lime_green  },
 	[SchemeState10]   = { white,         forest_green,        forest_green },
 
 	[SchemePrimary1]  = { black,         alice_blue,          alice_blue  },
@@ -51,7 +54,4 @@ static const char *colors[][3]      = {
 	[SchemePrimary8]  = { white,         cobalt_blue,         cobalt_blue  },
 	[SchemePrimary9]  = { white,         oxford_blue,         oxford_blue  },
 	[SchemePrimary10] = { white,         prussian_blue,       prussian_blue  },
-
-	[SchemeNorm]      = { white,         black,               black },
-	[SchemeSel]       = { gray,          blue,                blue  },
 };
