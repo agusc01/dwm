@@ -79,10 +79,12 @@ enum {
     SchemeState4,
     SchemeState5,
     SchemeState6,
-    SchemeState7,
-    SchemeState8,
-    SchemeState9,
-    SchemeState10,
+    SchemeState11,
+    SchemeState12,
+    SchemeState13,
+    SchemeState14,
+    SchemeState15,
+    SchemeState16,
 
     SchemePrimary1,
     SchemePrimary2,
@@ -90,10 +92,12 @@ enum {
     SchemePrimary4,
     SchemePrimary5,
     SchemePrimary6,
-    SchemePrimary7,
-    SchemePrimary8,
-    SchemePrimary9,
-    SchemePrimary10,
+    SchemePrimary11,
+    SchemePrimary12,
+    SchemePrimary13,
+    SchemePrimary14,
+    SchemePrimary15,
+    SchemePrimary16,
 
 }; /* color schemes */
 
