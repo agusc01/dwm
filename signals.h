@@ -4,7 +4,7 @@
 static Signal signals[] = {
 /* signum   function                         argument  */
     /* Layouts */
-	{  0,   setlayout,                      {.v = &layouts[0]}   },
+	{ 14,   setlayout,                      {.v = &layouts[0]}   },
 	{  1,   setlayout,                      {.v = &layouts[1]}   },
 	{  2,   setlayout,                      {.v = &layouts[2]}   },
     {  4,   setlayout,                      {.v = &layouts[3]}   },
