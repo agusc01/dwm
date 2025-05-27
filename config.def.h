@@ -1,5 +1,9 @@
 /* See LICENSE file for copyright and license details. */
-#define FONT "Ubuntu:size=9"
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define FONT_SIZE 12
+#define FONT "Ubuntu:size=" TOSTRING(FONT_SIZE)
+#define PAD_COLOUR (FONT_SIZE - 5)
 
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
