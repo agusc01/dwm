@@ -26,12 +26,12 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          SHCMD("dshortcuts") },
 	{ MODKEY,                       XK_o,      spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_i,      spawn,          SHCMD("dmenu_run_desktop") },
+	{ MODKEY,                       XK_i,      spawn,          SHCMD("rofi_launcher") },
     { MODKEY,                       XK_u,      spawn,          SHCMD("galculator") },
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock") },
-	{ MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("surf") },
-	{ MODKEY|ControlMask,           XK_f,      spawn,          SHCMD("firefox-esr") },
-	{ MODKEY|ControlMask|ShiftMask, XK_f,      spawn,          SHCMD("firefox-esr --private-window") },
+	// { MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("surf") },
+	// { MODKEY|ControlMask,           XK_f,      spawn,          SHCMD("firefox-esr") },
+	// { MODKEY|ControlMask|ShiftMask, XK_f,      spawn,          SHCMD("firefox-esr --private-window") },
 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
