@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#define FONT "Ubuntu:size=10"
+#define FONT "Ubuntu:size=9"
 
 /* appearance */
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
