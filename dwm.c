@@ -916,7 +916,7 @@ drawbar(Monitor *m)
 			ctmp = *ts;
 			*ts = '\0';
 			drw_text(drw, m->ww - tw + tx, 0, tw - tx, bh, 0, tp, 0);
-			tx += TEXTW(tp) - lrpad + 6; /* the six it is a magic number to fix. TODO: Make relative to something */
+			tx += TEXTW(tp) - lrpad + 5; /* the six it is a magic number to fix. TODO: Make relative to something */
 			if (ctmp == '\0') { break; }
 			drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
 			*ts = ctmp;
