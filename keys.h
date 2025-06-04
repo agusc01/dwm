@@ -36,8 +36,8 @@ static const Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ControlMask,              push)
 
-	{ MODKEY,                       XK_w,      incnmaster,     {.i = +1 } }, /* TODO: valid when it is the last client */
-	{ MODKEY,                       XK_e,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      incnmaster,     {.i = +1 } }, /* TODO: valid when it is the last client */
+	{ MODKEY|ControlMask|ShiftMask, XK_w,      incnmaster,     {.i = -1 } },
 
 	{ MODKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} }, /* decrement space in x axias */
 	{ MODKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} }, /* increment space in x axias */
@@ -55,21 +55,19 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_minus,  setlayout,      {.v = &layouts[5]} },
 
-	{ MODKEY|ShiftMask,             XK_q,      spawn,          SHCMD("smute notify") },
-	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("s0 notify") },
-	{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("s1 notify") },
-    { MODKEY|ShiftMask,             XK_r,      spawn,          SHCMD("sunmute notify") },
-
-	{ MODKEY|ShiftMask,             XK_comma,  spawn,          SHCMD("b0 notify") },
-	{ MODKEY|ShiftMask,             XK_period, spawn,          SHCMD("b1 notify") },
-
 	{ MODKEY,                       XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY,                       XK_period, cyclelayout,    {.i = +1 } },
     { MODKEY,                       XK_h,      cycleview,      {1} },
     { MODKEY,                       XK_l,      cycleview,      {0} },
 
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+    { MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY|ShiftMask|ControlMask, XK_f,      togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_s,      togglesticky,   {0} },
+
+	{ MODKEY,                       XK_q,      focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_w,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_q,      tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_w,      tagmon,         {.i = +1 } },
 
 	{ MODKEY|ShiftMask|ControlMask, XK_0,      view,           {.ui = ~0 } }, /* active ALL the layouts */
 
@@ -88,8 +86,5 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask|ControlMask, XK_p,      previewallwin,  {0} },
 
 	{ MODKEY|ShiftMask|ControlMask, XK_c,      killclient,     {0} },
-	{ MODKEY|ShiftMask|ControlMask, XK_BackSpace, quit,        {0} },
-
-    };
-
-
+	// { MODKEY|ShiftMask|ControlMask, XK_BackSpace, quit,        {0} },
+};
