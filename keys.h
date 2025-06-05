@@ -50,10 +50,10 @@ static const Key keys[] = {
     { MODKEY,                       XK_space,  setlayout,      {0} }, /* toggle between last 2 layouts*/
 	{ MODKEY,                       XK_Tab,    view,           {0} }, /* toggle between last 2 tags*/
 
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_minus,  setlayout,      {.v = &layouts[5]} },
+	{ MODKEY,                       XK_t,      spawn,          SHCMD("fsignal 14") },
+	{ MODKEY,                       XK_f,      spawn,          SHCMD("fsignal 1") },
+	{ MODKEY,                       XK_s,      spawn,          SHCMD("fsignal 2") },
+	{ MODKEY,                       XK_minus,  spawn,          SHCMD("fsignal 5") },
 
 	{ MODKEY,                       XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY,                       XK_period, cyclelayout,    {.i = +1 } },
