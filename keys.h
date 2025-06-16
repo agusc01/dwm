@@ -68,8 +68,8 @@ static const Key keys[] = {
 
 	{ MODKEY,                       XK_q,      focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_w,      focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_q,      tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_w,      tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_q,      tagmonmove,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_w,      tagmonmove,     {.i = +1 } },
 
 	{ MODKEY|ShiftMask|ControlMask, XK_0,      view,           {.ui = ~0 } }, /* active ALL the layouts */
 
