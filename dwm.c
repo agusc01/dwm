@@ -245,6 +245,8 @@ static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
+static Monitor *lastmon(void);
+static Monitor *firstmon(void);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
@@ -1036,19 +1038,51 @@ focusin(XEvent *e)
 		setfocus(selmon->sel);
 }
 
+
+Monitor *
+firstmon(void) {
+    return mons;
+}
+
+Monitor *
+lastmon(void) {
+    Monitor *m;
+
+    // Traverse the list of monitors to find the last one
+    for (m = mons; m && m->next; m = m->next);
+    return m;
+}
+
+
 void
 focusmon(const Arg *arg)
 {
-	Monitor *m;
+    Monitor *m;
 
-	if (!mons->next)
-		return;
-	if ((m = dirtomon(arg->i)) == selmon)
-		return;
-	unfocus(selmon->sel, 0);
-	selmon = m;
-	focus(NULL);
+    // Check if there are no other monitors
+    if (!mons->next)
+        return;
+
+    // Get the next monitor based on the argument
+    m = dirtomon(arg->i);
+
+    // If the next monitor is the same as the current one
+    if (m == selmon)
+        return;
+
+    // If we are on the last monitor and trying to move forward
+    if (selmon == lastmon() && arg->i > 0)
+        return;
+
+    // If we are on the first monitor and trying to move backward
+    if (selmon == firstmon() && arg->i < 0)
+        return;
+
+    unfocus(selmon->sel, 0); // Unfocus the current monitor
+    selmon = m; // Switch to the new monitor
+    focus(NULL); // Focus the new monitor
 }
+
 
 void
 focusstack(const Arg *arg)
@@ -2243,6 +2277,7 @@ tagstay(const Arg *arg)
 {
     tag(arg, 0);
 }
+
 
 void
 tagmon(const Arg *arg, const int moveview)
