@@ -298,7 +298,9 @@ static int stackpos(const Arg *arg);
 static void tag(const Arg *arg, const int moveview);
 static void tagmove(const Arg *arg);
 static void tagstay(const Arg *arg);
-static void tagmon(const Arg *arg);
+static void tagmon(const Arg *arg, const int moveview);
+static void tagmonmove(const Arg *arg);
+// static void tagmonstay(const Arg *arg);
 static void togglealttag(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglesticky(const Arg *arg);
@@ -2243,12 +2245,26 @@ tagstay(const Arg *arg)
 }
 
 void
-tagmon(const Arg *arg)
+tagmon(const Arg *arg, const int moveview)
 {
 	if (!selmon->sel || !mons->next)
 		return;
 	sendmon(selmon->sel, dirtomon(arg->i));
+    if (moveview)
+        focusmon(arg);
 }
+
+void
+tagmonmove(const Arg *arg)
+{
+    tagmon(arg, 1);
+}
+
+// void
+// tagmonstay(const Arg *arg)
+// {
+//     tagmon(arg, 0);
+// }
 
 void
 togglealttag(const Arg *arg)
