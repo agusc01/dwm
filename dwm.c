@@ -295,7 +295,9 @@ static void sighup(int unused);
 static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static int stackpos(const Arg *arg);
-static void tag(const Arg *arg);
+static void tag(const Arg *arg, const int moveview);
+static void tagmove(const Arg *arg);
+static void tagstay(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglealttag(const Arg *arg);
 static void togglebar(const Arg *arg);
@@ -2217,13 +2219,27 @@ stackpos(const Arg *arg) {
 }
 
 void
-tag(const Arg *arg)
+tag(const Arg *arg, const int moveview)
 {
 	if (selmon->sel && arg->ui & TAGMASK) {
 		selmon->sel->tags = arg->ui & TAGMASK;
 		focus(NULL);
 		arrange(selmon);
+        if(moveview)
+            view(arg);
 	}
+}
+
+void
+tagmove(const Arg *arg)
+{
+    tag(arg, 1);
+}
+
+void
+tagstay(const Arg *arg)
+{
+    tag(arg, 0);
 }
 
 void
@@ -2671,7 +2687,7 @@ void
 view(const Arg *arg)
 {
 	int i;
-	unsigned int tmptag;	
+	unsigned int tmptag;
 
 	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;

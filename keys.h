@@ -5,7 +5,8 @@
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,             KEY,      tagmove,        {.ui = 1 << TAG} }, \
+	{ MODKEY|AltMask|ShiftMask,     KEY,      tagstay,        {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \
     { MODKEY|AltMask,               KEY,      previewtag,     {.ui = TAG } },     \
 
@@ -72,7 +73,7 @@ static const Key keys[] = {
 
 	{ MODKEY|ShiftMask|ControlMask, XK_0,      view,           {.ui = ~0 } }, /* active ALL the layouts */
 
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, // README
+	{ MODKEY|ShiftMask,             XK_0,      tagstay,        {.ui = ~0 } }, // README
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
