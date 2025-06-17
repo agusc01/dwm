@@ -3,6 +3,9 @@
 
 include config.mk
 
+CFLAGS = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os -I/usr/X11R6/include -I/usr/include/freetype2 -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"6.5\" -DXINERAMA
+LDFLAGS = -L/usr/X11R6/lib -lX11 -lXrender -lXcomposite -lXinerama -lfontconfig -lXft -lImlib2 -lXext
+
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
 
