@@ -20,6 +20,14 @@ static const char cobalt_blue[]         = "#0D47A1";
 static const char oxford_blue[]         = "#031D44";
 static const char prussian_blue[]       = "#04395E";
 
+#define OPAQUE                 0x00
+
+static const unsigned int alphas[][3]      = {
+    /*               fg      bg        border*/
+    [SchemeNorm] = { OPAQUE, OPAQUE, OPAQUE },
+	[SchemeSel]  = { OPAQUE, OPAQUE, OPAQUE },
+};
+
 static const char *colors[][3]      = {
 	/*                    fg             bg                   border   */
 	[SchemeNorm]      = { white,         black,               gray },
