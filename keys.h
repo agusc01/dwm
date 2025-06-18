@@ -57,8 +57,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,      spawn,          SHCMD("fsignal 2") },
 	{ MODKEY,                       XK_minus,  spawn,          SHCMD("fsignal 5") },
 
-	{ MODKEY,                       XK_comma,  cyclelayout,    {.i = -1 } },
-	{ MODKEY,                       XK_period, cyclelayout,    {.i = +1 } },
+	{ MODKEY,                       XK_comma,  movelayout,     {.i = -1 } },
+	{ MODKEY,                       XK_period, movelayout,     {.i = +1 } },
     { MODKEY,                       XK_h,      cycleview,      {1} },
     { MODKEY,                       XK_l,      cycleview,      {0} },
 
