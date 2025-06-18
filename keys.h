@@ -59,8 +59,8 @@ static const Key keys[] = {
 
 	{ MODKEY,                       XK_comma,  movelayout,     {.i = -1 } },
 	{ MODKEY,                       XK_period, movelayout,     {.i = +1 } },
-    { MODKEY,                       XK_h,      cycleview,      {1} },
-    { MODKEY,                       XK_l,      cycleview,      {0} },
+    { MODKEY,                       XK_h,      moveview,       {1} },
+    { MODKEY,                       XK_l,      moveview,       {0} },
 
     { MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY|ShiftMask|ControlMask, XK_f,      togglefloating, {0} },
