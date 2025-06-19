@@ -13,12 +13,12 @@
 #define STACKKEYS(MOD,ACTION) \
 	{ MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
 	{ MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
-	/* { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \
-	{ MOD, XK_q,     ACTION##stack, {.i = 0 } }, \
-	{ MOD, XK_a,     ACTION##stack, {.i = 1 } }, \
-	{ MOD, XK_z,     ACTION##stack, {.i = 2 } }, \
-	{ MOD, XK_x,     ACTION##stack, {.i = -1 } },
-    */
+	{ MOD, XK_n,     ACTION##stack, {.i = 0 } }, \
+	{ MOD, XK_m,     ACTION##stack, {.i = 1 } }, \
+	{ MOD, XK_comma, ACTION##stack, {.i = 2 } }, \
+	{ MOD, XK_period, ACTION##stack,{.i = 3 } }, \
+	{ MOD, XK_slash, ACTION##stack, {.i = -1 } }, \
+    /* { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \ */
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/usr/bin/fish", "-c", cmd, NULL } }
@@ -33,7 +33,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock") },
 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_n,      togglealttag,   {0} },
+	{ MODKEY,                       XK_v,      togglealttag,   {0} },
 
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ControlMask,              push)
@@ -57,8 +57,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,      spawn,          SHCMD("fsignal 2") },
 	{ MODKEY,                       XK_minus,  spawn,          SHCMD("fsignal 5") },
 
-	{ MODKEY,                       XK_comma,  movelayout,     {.i = -1 } },
-	{ MODKEY,                       XK_period, movelayout,     {.i = +1 } },
+	{ MODKEY|AltMask,               XK_comma,  movelayout,     {.i = -1 } },
+	{ MODKEY|AltMask,               XK_period, movelayout,     {.i = +1 } },
     { MODKEY,                       XK_h,      moveview,       {1} },
     { MODKEY,                       XK_l,      moveview,       {0} },
 
