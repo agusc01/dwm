@@ -1045,21 +1045,21 @@ focusin(XEvent *e)
 		setfocus(selmon->sel);
 }
 
-
 Monitor *
-firstmon(void) {
+firstmon(void)
+{
     return mons;
 }
 
 Monitor *
-lastmon(void) {
+lastmon(void)
+{
     Monitor *m;
 
     // Traverse the list of monitors to find the last one
     for (m = mons; m && m->next; m = m->next);
     return m;
 }
-
 
 void
 focusmon(const Arg *arg)
