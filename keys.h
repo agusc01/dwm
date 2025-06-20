@@ -30,7 +30,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("rofi_internet") },
 	{ MODKEY,                       XK_y,      spawn,          SHCMD("rofi_menu") },
 	{ MODKEY,                       XK_u,      spawn,          SHCMD("rofi_launcher") },
-	{ MODKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock") },
+	{ MODKEY|ControlMask|ShiftMask|AltMask, XK_l, spawn,       SHCMD("slock") },
 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_v,      togglealttag,   {0} },
@@ -41,12 +41,12 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      incnmaster,     {.i = +1 } },
     { MODKEY|ControlMask|ShiftMask, XK_w,      incnmaster,     {.i = -1 } },
 
-	{ MODKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} }, /* decrement space in x axias */
-	{ MODKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} }, /* increment space in x axias */
-	{ MODKEY|ShiftMask,             XK_r,      setmfact,       {.f =  0.00} }, /* reset space in x axias */
-	{ MODKEY|ShiftMask,             XK_j,      setcfact,       {.f = +0.25} }, /* decrement space in y axias */
-	{ MODKEY|ShiftMask,             XK_k,      setcfact,       {.f = -0.25} }, /* increment space in y axias */
-	{ MODKEY|ShiftMask,             XK_t,      setcfact,       {.f =  0.00} }, /* reset space in y axias */
+	{ MODKEY|AltMask,               XK_h,      setmfact,       {.f = -0.05} }, /* decrement space in x axias */
+	{ MODKEY|AltMask,               XK_l,      setmfact,       {.f = +0.05} }, /* increment space in x axias */
+	{ MODKEY|AltMask,               XK_r,      setmfact,       {.f =  0.00} }, /* reset space in x axias */
+	{ MODKEY|AltMask,               XK_j,      setcfact,       {.f = +0.25} }, /* decrement space in y axias */
+	{ MODKEY|AltMask,               XK_k,      setcfact,       {.f = -0.25} }, /* increment space in y axias */
+	{ MODKEY|AltMask,               XK_t,      setcfact,       {.f =  0.00} }, /* reset space in y axias */
 
 	{ MODKEY,                       XK_Return, zoom,           {0} }, /* toggle changing master with the fisrt no master */
     { MODKEY,                       XK_space,  setlayout,      {0} }, /* toggle between last 2 layouts*/
