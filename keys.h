@@ -38,8 +38,8 @@ static const Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ControlMask,              push)
 
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      incnmaster,     {.i = +1 } }, /* TODO: valid when it is the last client */
-	{ MODKEY|ControlMask|ShiftMask, XK_w,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      incnmaster,     {.i = +1 } },
+    { MODKEY|ControlMask|ShiftMask, XK_w,      incnmaster,     {.i = -1 } },
 
 	{ MODKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} }, /* decrement space in x axias */
 	{ MODKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} }, /* increment space in x axias */

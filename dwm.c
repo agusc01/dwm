@@ -256,6 +256,7 @@ static long getstate(Window w);
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
+static int countclientsbytag(unsigned int dirtag);
 static void incnmaster(const Arg *arg);
 static void keypress(XEvent *e);
 static void keyrelease(XEvent *e);
@@ -1217,9 +1218,25 @@ grabkeys(void)
 	}
 }
 
+int
+countclientsbytag(unsigned int dirtag)
+{
+    int count = 0;
+    Client *c;
+
+    for (c = selmon->clients; c ; c = c->next) {
+        if (c->tags & dirtag) {
+            count++;
+        }
+    }
+    return count;
+}
+
 void
 incnmaster(const Arg *arg)
 {
+    if(arg->i > 0 && selmon->pertag->nmasters[selmon->pertag->curtag] == countclientsbytag(selmon->pertag->curtag)) return;
+
 	selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] = MAX(selmon->nmaster + arg->i, 0);
 	arrange(selmon);
 }
