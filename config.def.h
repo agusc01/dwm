@@ -10,7 +10,7 @@
     static const unsigned int borderpx  = 0;        /* border pixel of windows */
     static const unsigned int snap      = 32;       /* snap pixel */
     static const int scalepreview       = 2;        /* preview scaling (display w and h / scalepreview) */
-    static const int previewbar         = 1;        /* show the bar in the preview window */
+    static const int previewbar         = 0;        /* show the bar in the preview window */
     static const unsigned int cornerrad = 25;
     static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
     static const unsigned int gappiv    = 7;        /* vert inner gap between windows */
@@ -29,7 +29,7 @@
     static const unsigned int borderpx  = 0;        /* border pixel of windows */
     static const unsigned int snap      = 32;       /* snap pixel */
     static const int scalepreview       = 2;        /* preview scaling (display w and h / scalepreview) */
-    static const int previewbar         = 1;        /* show the bar in the preview window */
+    static const int previewbar         = 0;        /* show the bar in the preview window */
     static const unsigned int cornerrad = 25;
     static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
     static const unsigned int gappiv    = 5;        /* vert inner gap between windows */
