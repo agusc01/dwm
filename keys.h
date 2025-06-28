@@ -85,8 +85,10 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 
-	{ MODKEY|ShiftMask|ControlMask, XK_p,      previewallwin,  {0} },
+	{ MODKEY|ControlMask,           XK_p,      previewallwin,  {0} },
 
-	{ MODKEY|ShiftMask|ControlMask, XK_c,      killclient,     {0} },
+	{ MODKEY|ControlMask,           XK_c,      killclient,     {0} },
+
+	{ MODKEY|AltMask,               XK_F4,     spawn,          SHCMD("rofi_power") },
 	// { MODKEY|ShiftMask|ControlMask, XK_BackSpace, quit,        {0} },
 };
