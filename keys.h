@@ -38,6 +38,9 @@ static const Key keys[] = {
     { MODKEY,                       XK_F10,    spawn,          SHCMD("s1 notify") },
     { MODKEY,                       XK_F11,    spawn,          SHCMD("stogglemute notify") },
 
+    { MODKEY|ControlMask,           XK_F9,     spawn,          SHCMD("b0 notify") },
+    { MODKEY|ControlMask,           XK_F10,    spawn,          SHCMD("b1 notify") },
+
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_v,      togglealttag,   {0} },
 
