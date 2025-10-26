@@ -30,6 +30,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_i,      spawn,          SHCMD("rofi_internet") },
 	{ MODKEY,                       XK_y,      spawn,          SHCMD("rofi_menu") },
 	{ MODKEY,                       XK_u,      spawn,          SHCMD("rofi_launcher") },
+    { MODKEY,                       XK_Print,  spawn,          SHCMD("flameshot gui") },
 	{ MODKEY|ControlMask|ShiftMask|AltMask, XK_l, spawn,       SHCMD("slock") },
 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
