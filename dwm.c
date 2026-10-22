@@ -900,6 +900,29 @@ dirtomon(int dir)
 	return m;
 }
 
+/* Measure visible status segments, excluding the embedded color control bytes. */
+static int
+statuswidth(char *status)
+{
+	char *segment = status, *end = status;
+	unsigned char control;
+	int width = 0;
+
+	for (;;) {
+		while (*end && (unsigned char)*end > LENGTH(colors))
+			end++;
+		control = (unsigned char)*end;
+		*end = '\0';
+		if (*segment)
+			width += drw_fontset_getwidth(drw, segment) + PAD_COLOUR;
+		*end = (char)control;
+		if (!control)
+			break;
+		segment = ++end;
+	}
+	return width;
+}
+
 void
 drawbar(Monitor *m)
 {
@@ -907,28 +930,32 @@ drawbar(Monitor *m)
 	// int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
-	char *ts = stext;
-	char *tp = stext;
-	int tx = 0;
-	char ctmp;
+	char *ts = stext, *tp = stext;
+	int tx = 0, segment_width;
+	unsigned char control;
 	Client *c;
 
 	if (!m->showbar)
 		return;
 
-	/* draw status first so it can be overdrawn by tags later */
+	/* Measure and draw the same visible segments to avoid truncating the clock. */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad; /* remove +2 (what it mean 2px right padding) */
-		while (1) {
-			if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
-			ctmp = *ts;
+		tw = statuswidth(stext);
+		for (;;) {
+			while (*ts && (unsigned char)*ts > LENGTH(colors))
+				ts++;
+			control = (unsigned char)*ts;
 			*ts = '\0';
-			drw_text(drw, m->ww - tw + tx, 0, tw - tx, bh, 0, tp, 0);
-			tx += TEXTW(tp) - lrpad + PAD_COLOUR;
-			if (ctmp == '\0') { break; }
-			drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
-			*ts = ctmp;
+			if (*tp) {
+				segment_width = drw_fontset_getwidth(drw, tp) + PAD_COLOUR;
+				drw_text(drw, m->ww - tw + tx, 0, segment_width, bh, 0, tp, 0);
+				tx += segment_width;
+			}
+			*ts = (char)control;
+			if (!control)
+				break;
+			drw_setscheme(drw, scheme[control - 1]);
 			tp = ++ts;
 		}
 	}
