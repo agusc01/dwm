@@ -19,9 +19,10 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          MODKEY|ControlMask,                 Button3,        setlayout,      {.v = &layouts[11]} },
 	{ ClkLtSymbol,          MODKEY|ShiftMask|ControlMask,       Button1,        setlayout,      {.v = &layouts[12]} },
 	{ ClkLtSymbol,          MODKEY|ShiftMask|ControlMask,       Button3,        setlayout,      {.v = &layouts[13]} },
-    { ClkStatusText,        0,                                  Button1,        spawn,          SHCMD("rofi_internet") },
-    { ClkStatusText,        0,                                  Button2,        spawn,          SHCMD("rofi_menu") },
-    { ClkStatusText,        0,                                  Button3,        spawn,          SHCMD("st") },
+    /* Temporary debug actions: each button identifies the clicked module. */
+    { ClkStatusText, 0, Button1, statusclick, {.ui = 1} },
+    { ClkStatusText, 0, Button2, statusclick, {.ui = 2} },
+    { ClkStatusText, 0, Button3, statusclick, {.ui = 3} },
 	{ ClkClientWin,         MODKEY,                             Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,                             Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,                             Button3,        resizemouse,    {0} },
