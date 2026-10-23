@@ -900,6 +900,9 @@ dirtomon(int dir)
 	return m;
 }
 
+/* Keep compact margins between the individual colored status segments. */
+#define STATUS_SEGMENT_PAD 2
+
 /* Measure visible status segments, excluding the embedded color control bytes. */
 static int
 statuswidth(char *status)
@@ -914,7 +917,7 @@ statuswidth(char *status)
 		control = (unsigned char)*end;
 		*end = '\0';
 		if (*segment)
-			width += drw_fontset_getwidth(drw, segment) + PAD_COLOUR;
+			width += drw_fontset_getwidth(drw, segment) + STATUS_SEGMENT_PAD;
 		*end = (char)control;
 		if (!control)
 			break;
@@ -948,7 +951,7 @@ drawbar(Monitor *m)
 			control = (unsigned char)*ts;
 			*ts = '\0';
 			if (*tp) {
-				segment_width = drw_fontset_getwidth(drw, tp) + PAD_COLOUR;
+				segment_width = drw_fontset_getwidth(drw, tp) + STATUS_SEGMENT_PAD;
 				drw_text(drw, m->ww - tw + tx, 0, segment_width, bh, 0, tp, 0);
 				tx += segment_width;
 			}
