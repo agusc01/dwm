@@ -965,7 +965,7 @@ statuswidth(char *status)
 
         /* IDs are metadata, never user-visible characters. */
         if (p[0] == '@' && p[1] == '{' && p[2] &&
-            p[3] == '}' && strchr("cmnblvdthk", p[2])) {
+            p[3] == '}' && strchr("cmnblvdthkup", p[2])) {
             addstatuspart(start, used, color, id);
             start = used;
             id = p[2];
