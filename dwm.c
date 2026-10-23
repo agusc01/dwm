@@ -241,6 +241,8 @@ static void detach(Client *c);
 static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
+static void statusclick(const Arg *arg);
+static char statuspartat(int relative_x);
 static void drawbars(void);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
@@ -346,7 +348,21 @@ static XImage *scaledownimage(XImage *orig_image, unsigned int cw, unsigned int 
 
 /* variables */
 static const char broken[] = "broken";
-static char stext[256];
+static char stext[1024];
+static char status_visible[1024];
+static char status_clicked_id;
+
+#define STATUS_MAX_PARTS 128
+typedef struct {
+    unsigned int start, end;
+    unsigned int scheme;
+    int width;
+    char id;
+} StatusPart;
+
+static StatusPart status_parts[STATUS_MAX_PARTS];
+static unsigned int status_parts_count;
+static int status_total_width;
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int enablefullscreen = 0;
@@ -597,8 +613,13 @@ buttonpress(XEvent *e)
 			}
 		}
 
-		if (ev->x > selmon->ww - TEXTW(stext))
-			click = ClkStatusText;
+		/* Match the actual rendered status, not TEXTW(raw control bytes). */
+		if (ev->x >= selmon->ww - statuswidth(stext)) {
+			status_clicked_id = statuspartat(
+				ev->x - (selmon->ww - status_total_width));
+			if (status_clicked_id)
+				click = ClkStatusText;
+		}
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
 		restack(selmon);
@@ -900,68 +921,130 @@ dirtomon(int dir)
 	return m;
 }
 
-/* Keep compact margins between the individual colored status segments. */
+/* Keep the same compact padding for drawing and hit testing. */
 #define STATUS_SEGMENT_PAD 2
 
-/* Measure visible status segments, excluding the embedded color control bytes. */
+/* Split colored and clickable status text into measurable, visible spans.
+ * An optional @{x} marker assigns a stable module ID to the following text.
+ * Existing color control bytes remain supported and are never shown.
+ */
+static void
+addstatuspart(unsigned int start, unsigned int end, unsigned int color, char id)
+{
+    StatusPart *part;
+
+    if (start == end || status_parts_count >= STATUS_MAX_PARTS)
+        return;
+
+    status_visible[end] = '\0';
+    part = &status_parts[status_parts_count++];
+    part->start = start;
+    part->end = end;
+    part->scheme = color;
+    part->id = id;
+    part->width = drw_fontset_getwidth(drw, status_visible + start)
+        + STATUS_SEGMENT_PAD;
+    status_total_width += part->width;
+}
+
 static int
 statuswidth(char *status)
 {
-	char *segment = status, *end = status;
-	unsigned char control;
-	int width = 0;
+    unsigned int start = 0, used = 0;
+    unsigned int color = SchemeNorm;
+    unsigned char byte;
+    char id = 0;
+    const char *p;
 
-	for (;;) {
-		while (*end && (unsigned char)*end > LENGTH(colors))
-			end++;
-		control = (unsigned char)*end;
-		*end = '\0';
-		if (*segment)
-			width += drw_fontset_getwidth(drw, segment) + STATUS_SEGMENT_PAD;
-		*end = (char)control;
-		if (!control)
-			break;
-		segment = ++end;
-	}
-	return width;
+    status_parts_count = 0;
+    status_total_width = 0;
+
+    for (p = status; *p && used < sizeof(status_visible) - 1;) {
+        byte = (unsigned char)*p;
+
+        /* IDs are metadata, never user-visible characters. */
+        if (p[0] == '@' && p[1] == '{' && p[2] &&
+            p[3] == '}' && strchr("cmnblvdthk", p[2])) {
+            addstatuspart(start, used, color, id);
+            start = used;
+            id = p[2];
+            p += 4;
+        } else if (byte > 0 && byte <= LENGTH(colors)) {
+            addstatuspart(start, used, color, id);
+            start = used;
+            color = byte - 1;
+            p++;
+        } else {
+            status_visible[used++] = *p++;
+        }
+    }
+    addstatuspart(start, used, color, id);
+    status_visible[used] = '\0';
+    return status_total_width;
+}
+
+/* Find the module by exactly the same widths used while drawing. */
+static char
+statuspartat(int relative_x)
+{
+    unsigned int i;
+
+    if (relative_x < 0)
+        return 0;
+
+    for (i = 0; i < status_parts_count; i++) {
+        if (relative_x < status_parts[i].width)
+            return status_parts[i].id;
+        relative_x -= status_parts[i].width;
+    }
+    return 0;
+}
+
+/* Dispatch only a known module ID and mouse button, never status text. */
+static void
+statusclick(const Arg *arg)
+{
+    char module[2] = { status_clicked_id, '\0' };
+    char button[2] = { (char)('0' + arg->ui), '\0' };
+    const char *const cmd[] = {
+        "/bin/sh", "-c",
+        "exec \\"$HOME/.config/dbar/dbar\\" click \\"$1\\" \\"$2\\"",
+        "dbar-click", module, button, NULL
+    };
+    Arg command = { .v = cmd };
+
+    if (!status_clicked_id || arg->ui < 1 || arg->ui > 3)
+        return;
+    spawn(&command);
 }
 
 void
 drawbar(Monitor *m)
 {
 	int x, w, wdelta, tw = 0;
-	// int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
-	char *ts = stext, *tp = stext;
-	int tx = 0, segment_width;
-	unsigned char control;
+	int tx = 0;
 	Client *c;
 
 	if (!m->showbar)
 		return;
 
-	/* Measure and draw the same visible segments to avoid truncating the clock. */
-	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
+	/* Render the spans measured for click detection, with identical bounds. */
+	if (m == selmon) {
 		tw = statuswidth(stext);
-		for (;;) {
-			while (*ts && (unsigned char)*ts > LENGTH(colors))
-				ts++;
-			control = (unsigned char)*ts;
-			*ts = '\0';
-			if (*tp) {
-				segment_width = drw_fontset_getwidth(drw, tp) + STATUS_SEGMENT_PAD;
-				drw_text(drw, m->ww - tw + tx, 0, segment_width, bh, 0, tp, 0);
-				tx += segment_width;
-			}
-			*ts = (char)control;
-			if (!control)
-				break;
-			drw_setscheme(drw, scheme[control - 1]);
-			tp = ++ts;
+		for (i = 0; i < status_parts_count; i++) {
+			StatusPart *part = &status_parts[i];
+			char saved = status_visible[part->end];
+			status_visible[part->end] = '\0';
+			drw_setscheme(drw, scheme[part->scheme]);
+			drw_text(drw, m->ww - tw + tx, 0,
+				part->width, bh, 0, status_visible + part->start, 0);
+			status_visible[part->end] = saved;
+			tx += part->width;
 		}
 	}
+
 
 	for (c = m->clients; c; c = c->next) {
 		occ |= c->tags;
