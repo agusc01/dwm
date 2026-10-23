@@ -242,6 +242,7 @@ static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void statusclick(const Arg *arg);
+static int statuswidth(char *status);
 static char statuspartat(int relative_x);
 static void drawbars(void);
 static void enternotify(XEvent *e);
@@ -1008,7 +1009,7 @@ statusclick(const Arg *arg)
     char button[2] = { (char)('0' + arg->ui), '\0' };
     const char *const cmd[] = {
         "/bin/sh", "-c",
-        "exec \\"$HOME/.config/dbar/dbar\\" click \\"$1\\" \\"$2\\"",
+        "exec \"$HOME/.config/dbar/dbar\" click \"$1\" \"$2\"",
         "dbar-click", module, button, NULL
     };
     Arg command = { .v = cmd };
@@ -1044,7 +1045,6 @@ drawbar(Monitor *m)
 			tx += part->width;
 		}
 	}
-
 
 	for (c = m->clients; c; c = c->next) {
 		occ |= c->tags;
