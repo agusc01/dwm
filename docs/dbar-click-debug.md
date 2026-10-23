@@ -36,3 +36,15 @@ branch; otherwise older dwm may draw marker text on the screen.
 The debug-only callback will later be replaced with configurable actions;
 no operational settings (volume, brightness, connectivity, etc.) are changed
 by this feature.
+
+## USB and printer modules
+
+The status marker allowlist also accepts `@{u}` for USB storage and
+`@{p}` for CUPS printers. Both follow the same coordinate and color handling
+as existing segments. Left/middle/right clicks forward the identifier to
+`dbar click u BUTTON` or `dbar click p BUTTON`, respectively. USB and
+printer actions are diagnostic placeholders; no device or print job is changed.
+
+After installing the companion dbar branch, test both visible modules in
+colored and monochrome modes. Confirm that hidden modules leave no phantom
+click targets and the clock remains clickable in its actual new position.
